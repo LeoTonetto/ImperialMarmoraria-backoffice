@@ -1,0 +1,587 @@
+@import "tailwindcss";
+
+body {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  gap: 20px;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+#paginaAtual {
+  text-decoration: underline 2px;
+}
+
+main {
+  background-color: #fff;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+main > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1500px;
+  width: 100%;
+}
+
+main > div:first-child > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+main > div:first-child > div label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+
+main > div:first-child > div select {
+  width: 150px;
+  height: 40px;
+  padding-left: 10px;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+main > div:first-child > div input {
+   width: 400px;
+   height: 40px;
+   padding-left: 10px;
+   border: 1px solid rgb(202, 202, 202);
+   border-radius: 8px;
+}
+
+section {
+  background-color: #22262e;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  gap: 5px;
+}
+
+  section a {
+      display: flex;
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      background-color: #343a45;
+      width: 100%;
+      height: 10%;
+  }
+
+      section a:hover {
+          background-color: #4E5066;
+      }
+
+div.table-title {
+  display: block;
+  margin: auto;
+  padding: 5px;
+  width: 100%;
+}
+
+.table-title h3 {
+  color: #fafafa;
+  font-size: 30px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius: 3px;
+  border-collapse: collapse;
+  min-height: 70px;
+  max-width: 1500px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-hover {
+  animation: transition-pages 1s 1;
+}
+
+.table-fill > div:nth-of-type(1),
+.table-fill > div > div > div:nth-of-type(1) {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid rgba(158, 155, 155, 0.514);
+}
+
+.table-fill > div:nth-of-type(1) {
+  background-color: #22262e;
+  color: #e9e7e7;
+  font-size: 20px;
+  border-bottom: 4px solid rgb(158, 155, 155);
+}
+
+.table-fill > div > div > div:nth-of-type(1) {
+  font-size: 16px;
+  color: #4f5052;
+}
+
+  .table-fill > div > div > div:nth-of-type(1):hover {
+      background-color: #707172;
+      color: #f3f0f0;
+      cursor: pointer;
+  }
+
+.table-gray {
+  background-color: #eeecec;
+}
+
+.table-fill > div:nth-of-type(1) > p,
+.table-fill > div > div > div:nth-of-type(1) > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  /* Define o tamanho de cada tabela */
+
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(1),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(1) {
+      width: 5%;
+  }
+
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(2),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(2) {
+      width: 35%;
+  }
+
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(3),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(3),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(4),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(4),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(5),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(5),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(6),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(6) {
+      width: 15%;
+  }
+
+  /* Define as bordas */
+
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(1),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(1),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(2),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(2),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(3),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(3),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(4),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(4),
+  .table-fill > div:nth-of-type(1) > p:nth-of-type(5),
+  .table-fill > div > div > div:nth-of-type(1) > p:nth-of-type(5) {
+      border-right: 1px solid rgba(158, 155, 155, 0.514);
+  }
+
+.table-hover > div > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  opacity: 1;
+  width: 80%;
+  height: 360px;
+  padding: 0 10%;
+  transition: all .2s ease-in;
+}
+
+  .table-hover > div > form.disabled {
+      visibility: hidden;
+      height: 0px;
+      opacity: 0.01;
+      pointer-events: none;
+  }
+
+  .table-hover > div > form label {
+      font-size: 18px;
+      font-weight: 500;
+  }
+
+  .table-hover > div > form > div {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+  }
+
+      .table-hover > div > form > div:nth-of-type(1) > div {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+      }
+
+      .table-hover > div > form > div > div > div,
+      .table-hover > div > form > div:nth-of-type(2) > div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+
+.error_message {
+  color: red;
+  font-size: 14px;
+}
+
+.table-hover > div > form > div:nth-of-type(1) > div {
+  width: 100%;
+}
+
+  /* Define o tamanho dos inputs e labels */
+
+  .table-hover > div > form > div:nth-of-type(1) > div:nth-of-type(1) > div,
+  .table-hover > div > form > div:nth-of-type(1) > div:nth-of-type(2) > div {
+      width: 100%;
+  }
+
+.table-hover > div > form > div:first-of-type > div:first-of-type > div > label {
+  width: 100%;
+  max-width: 150px;
+}
+
+.table-hover > div > form > div:nth-of-type(1) > div:nth-of-type(3) > div > input {
+  width: 110px;
+}
+
+.table-hover > div > form > div:nth-of-type(2) > div:nth-of-type(3) > label,
+.table-hover > div > form > div:nth-of-type(2) > div:nth-of-type(4) > label {
+  width: 100%;
+}
+
+.table-hover > div > form > div:nth-of-type(2) > div > input {
+  width: 100px;
+}
+
+.table-hover > div > form > div:nth-of-type(2) > div > select {
+  width: 120px;
+}
+
+.table-hover > div > form input,
+.table-hover > div > form select {
+  width: 100%;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.table-hover > div > form select {
+  cursor: pointer;
+}
+
+.descricao_orcamento {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-hover > div > form textarea {
+  resize: none;
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.table-email {
+  align-items: center;
+  justify-content: start !important;
+  gap: 10px;
+}
+
+.table-hover > div > form > div:last-of-type {
+  justify-content: center !important;
+  gap: 30px !important;
+}
+
+  .table-hover > div > form > div:last-of-type > button {
+      width: 220px;
+      height: 50px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 500;
+  }
+
+      .table-hover > div > form > div:last-of-type > button:last-child,
+      .cancelarUpdate button:last-child,
+      .confirmacaoNecessaria button,
+      .confirmarUpdate button:last-child,
+      .atualizado button,
+      .confirmarDelete button:last-child,
+      .excluido button:last-child{
+          background-color: rgb(25, 25, 179);
+      }
+
+      .table-hover > div > form > div:last-of-type > button:first-child,
+      .cancelarUpdate button:first-child,
+      .confirmarUpdate button:first-child,
+      .confirmarDelete button:first-child {
+          background-color: rgb(207, 15, 15);
+      }
+
+      .table-hover > div > form > div:last-of-type > button:last-child:hover,
+      .cancelarUpdate button:last-child:hover,
+      .confirmacaoNecessaria button:hover,
+      .confirmarUpdate button:last-child:hover,
+      .atualizado button,
+      .confirmarDelete button:last-child,
+      .excluido button:last-child:hover{
+          background-color: rgb(19, 19, 146);
+      }
+
+      .table-hover > div > form > div:last-of-type > button:first-child:hover,
+      .cancelarUpdate button:first-child:hover,
+      .confirmarUpdate button:first-child:hover,
+      .confirmarDelete button:first-child:hover{
+          background-color: rgb(180, 21, 21);
+      }
+
+.table-pages {
+  display: flex;
+  gap: 10px;
+  overflow-x: hidden;
+  margin: 0 30px 30px;
+}
+
+  .table-pages > div,
+  .table-pages > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      border: solid 1px black;
+      border-radius: 3px;
+  }
+
+  .table-pages > div {
+      cursor: pointer;
+  }
+
+  .table-pages > .active {
+      background-color: rgba(0, 0, 0, 0.212);
+  }
+
+/* Estiliza a div de cancelar um update */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+  .overlay.hidden {
+      visibility: hidden;
+      opacity: 0.1;
+      pointer-events: none;
+  }
+
+.cancelarUpdate,
+.confirmarUpdate,
+.carregamento-container,
+.confirmarDelete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  background-color: #FFFFFF;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.carregamento-container {
+  align-items: center !important;
+}
+
+.cancelarUpdate h3,
+.confirmarUpdate h3,
+.confirmarDelete h3{
+  font-size: 30px;
+  text-align: center;
+}
+
+.cancelarUpdate p,
+.confirmacaoNecessaria p,
+.confirmarUpdate p,
+.atualizado p,
+.confirmarDelete p,
+.excluido p{
+  font-size: 24px;
+  padding: 20px 0 40px;
+}
+
+.cancelarUpdate div,
+.confirmarUpdate div,
+.confirmarDelete div{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cancelarUpdate button,
+.confirmacaoNecessaria button,
+.confirmarUpdate button,
+.atualizado button,
+.confirmarDelete button,
+.excluido button{
+  height: 40px;
+  width: 100px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.confirmacaoNecessaria,
+.atualizado,
+.excluido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  background-color: #FFFFFF;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.carregamento {
+  display: flex;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  animation: giro 2s linear infinite;
+  transform-origin: center center; /* importante */
+}
+
+/* Animação de carregamento */
+.carregamento_dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: -7.5px;
+  background-color: gray;
+}
+
+  .carregamento_dot:nth-child(1) {
+      transform: rotate(0deg) translateX(30px);
+  }
+
+  .carregamento_dot:nth-child(2) {
+      transform: rotate(72deg) translateX(30px);
+  }
+
+  .carregamento_dot:nth-child(3) {
+      transform: rotate(144deg) translateX(30px);
+  }
+
+  .carregamento_dot:nth-child(4) {
+      transform: rotate(216deg) translateX(30px);
+  }
+
+  .carregamento_dot:nth-child(5) {
+      transform: rotate(288deg) translateX(30px);
+  }
+
+@keyframes giro {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes transition-pages {
+  0% {
+      opacity: 0;
+      transform: translateX(20px);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@media(max-width: 14800px) {
+  body {
+      flex-direction: column;
+      min-height: 100vh;
+      height: 100%;
+      gap: 80px;
+  }
+
+  section {
+      width: 100%;
+      flex-direction: row;
+      height: 80px;
+  }
+
+      section a {
+          background-color: transparent;
+          height: 100%;
+      }
+
+  main {
+      width: 100vw;
+      min-height: calc(100vh - 200px);
+      justify-content: center;
+  }
+
+  .table-fill {
+      margin: 0;
+  }
+}
