@@ -21,7 +21,7 @@ export interface GetOrcamentosResponse {
  */
 export async function GetOrcamentos(options?: { name?: string; status?: string }): Promise<GetOrcamentosResponse> {
   try {
-    let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}api/Orcamento`;
+    let url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Orcamento`;
 
     // Adiciona query params se houver filtros
     const queryParams = new URLSearchParams();
