@@ -48,28 +48,38 @@ export default function ShowOrcamentos({ orcamentos }: Props) {
   return (
     <div className="table-fill w-full">
       {/* Cabeçalho */}
-      <div className="table-header flex bg-gray-100 font-semibold">
-        <div className="table-cell flex-1 px-4 py-2">ID</div>
-        <div className="table-cell flex-1 px-4 py-2">Nome</div>
-        <div className="table-cell flex-1 px-4 py-2">Data Entrada</div>
-        <div className="table-cell flex-1 px-4 py-2">Status</div>
-        <div className="table-cell flex-1 px-4 py-2">Valor</div>
-        <div className="table-cell flex-1 px-4 py-2">Data Finalizado</div>
+      <div className="table-header flex bg-gray-100 font-semibold items-center">
+        <div className="table-cell flex-1 px-4 py-2 text-center ">ID</div>
+        <div className="table-cell flex-8 px-4 py-2 text-center">Nome</div>
+        <div className="table-cell flex-3 px-4 py-2 text-center">Data Entrada</div>
+        <div className="table-cell flex-2 px-4 py-2 text-center">Status</div>
+        <div className="table-cell flex-2 px-4 py-2 text-center">Valor</div>
+        <div className="table-cell flex-3 px-4 py-2 text-center">Data Finalizado</div>
       </div>
 
       {/* Linhas */}
       <div className="">
-        {orcamentos.map((orc) => (
+        {orcamentos.map((orc, index) => (
           <div
             key={orc.id}
-            className="flex hover:bg-gray-100 w-full"
+            className={`flex cursor-pointer hover:bg-gray-100 ${
+              index % 2 === 0 ? "bg-white" : "bg-gray-50"
+            }`}
           >
-            <div className="table-cell flex-1 px-4 py-2">{orc.id}</div>
-            <div className="table-cell flex-1 px-4 py-2">{orc.nome}</div>
-            <div className="table-cell flex-1 px-4 py-2">{formataData(orc.dataInicio)}</div>
-            <div className="table-cell flex-1 px-4 py-2">{formataStatus(orc.status)}</div>
-            <div className="table-cell flex-1 px-4 py-2">{formataValor(orc.valor)}</div>
-            <div className="table-cell flex-1 px-4 py-2">{formataData(orc.dataFim)}</div>
+            <div className="table-cell flex-1 px-4 py-2 border border-gray-200">{orc.id}</div>
+            <div className="table-cell flex-8 px-4 py-2 border border-gray-200 ">{orc.nome}</div>
+            <div className="table-cell flex-3 px-4 py-2 border border-gray-200 text-center">
+              {formataData(orc.dataInicio)}
+            </div>
+            <div className="table-cell flex-2 px-4 py-2 border border-gray-200 text-center">
+              {formataStatus(orc.status)}
+            </div>
+            <div className="table-cell flex-2 px-4 py-2 border border-gray-200 text-center">
+              {formataValor(orc.valor)}
+            </div>
+            <div className="table-cell flex-3 px-4 py-2 border border-gray-200 text-center">
+              {formataData(orc.dataFim)}
+            </div>
           </div>
         ))}
       </div>

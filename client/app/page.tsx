@@ -32,7 +32,7 @@ export default function Home() {
     const nome = e.target.value;
     setPesquisaNome(nome);
 
-    const result = await GetOrcamentos(nome ? { name: nome } : undefined);
+    const result = await GetOrcamentos(nome ? { name: nome, status: filtroStatus !== 'all' ? filtroStatus : undefined } : undefined);
     if (result?.orcamentos) setOrcamentos(result.orcamentos);
   };
 

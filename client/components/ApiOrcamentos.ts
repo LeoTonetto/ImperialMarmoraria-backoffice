@@ -25,7 +25,7 @@ export async function GetOrcamentos(options?: { name?: string; status?: string }
 
     // Adiciona query params se houver filtros
     const queryParams = new URLSearchParams();
-    if (options?.name) queryParams.append("name", options.name);
+    if (options?.name) queryParams.append("nome", options.name);
     if (options?.status) queryParams.append("status", options.status);
 
     if (queryParams.toString()) {
