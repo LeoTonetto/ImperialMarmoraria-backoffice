@@ -361,31 +361,38 @@ div.table-title {
           background-color: rgb(180, 21, 21);
       }
 
-.table-pages {
-  display: flex;
-  gap: 10px;
-  overflow-x: hidden;
-  margin: 0 30px 30px;
-}
-
-  .table-pages > div,
-  .table-pages > span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 20px;
-      height: 20px;
-      border: solid 1px black;
-      border-radius: 3px;
-  }
-
-  .table-pages > div {
-      cursor: pointer;
-  }
-
-  .table-pages > .active {
-      background-color: rgba(0, 0, 0, 0.212);
-  }
+      .table-pages {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+      
+      .table-pages > div {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #999;
+        border-radius: 5px;
+        background-color: white;
+        cursor: pointer;
+        user-select: none;
+        font-size: 16px;
+        transition: all 0.2s ease;
+      }
+      
+      .table-pages > div:hover {
+        background-color: #f0f0f0;
+      }
+      
+      .table-pages > div.active {
+        background-color: #0070f3;
+        color: white;
+        border-color: #0070f3;
+      }
 
 /* Estiliza a div de cancelar um update */
 
