@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { UpdateOrcamento } from "./ApiOrcamentos";
 
 export interface Orcamento {
   id: number;
@@ -55,11 +56,41 @@ export default function ShowOrcamentos({ orcamentos }: Props) {
     });
   };
 
-  const handleSave = (id: number) => {
-    console.log("Salvando orçamento:", id, editStates[id]);
-    // Exemplo:
-    // await UpdateOrcamento(id, editStates[id])
+  const handleSave = async (id: number) => {
+    const edits = editStates[id];
+    if (!edits) return;
+  
+    // Encontra o orçamento original
+    const original = orcamentos.find((o) => o.id === id);
+    if (!original) return;
+  
+    // Mescla original + alterações
+    const dadosAtualizados = {
+      ...original,
+      ...edits,
+      valor: edits.valor?.toString() ?? original.valor.toString(),
+      dataFim: edits.dataFim || original.dataFim,
+    };
+  
+    try {
+      const resposta = await UpdateOrcamento(id, dadosAtualizados);
+  
+      if (resposta.sucesso) {
+        alert("Orçamento atualizado com sucesso!");
+  
+        // Atualiza estado local (se orcamentos for reativo)
+        setEditStates((prev) => ({ ...prev, [id]: {} }));
+        setExpandedId(null);
+      } else {
+        alert(resposta.mensagem || "Erro ao atualizar orçamento.");
+      }
+    } catch (error) {
+      console.error("Erro ao salvar orçamento:", error);
+      alert("Erro inesperado ao salvar.");
+    }
+    window.location.reload();
   };
+  
 
   const formataData = (data?: string | null) => {
     if (!data) return "";
@@ -164,12 +195,22 @@ export default function ShowOrcamentos({ orcamentos }: Props) {
       <div className="bg-white p-3 rounded-md shadow-sm border border-gray-100">
         <p className="text-gray-500 text-xs font-medium uppercase mb-1">Valor</p>
         <input
-          type="number"
-          value={editStates[orc.id]?.valor ?? orc.valor}
-          onChange={(e) =>
-            handleFieldChange(orc.id, "valor", Number(e.target.value))
+          type="text"
+          inputMode="decimal"
+          value={
+            editStates[orc.id]?.valor?.toString().replace(".", ",") ??
+            orc.valor.toString().replace(".", ",")
           }
-          className="w-full border border-gray-300 rounded-md p-2 focus:ring-1 focus:ring-[#631b32] focus:outline-none"
+          onChange={(e) => {
+            // Permite apenas números, vírgulas e pontos
+            const value = e.target.value.replace(/[^0-9.,]/g, "");
+            handleFieldChange(
+              orc.id,
+              "valor",
+              value.replace(",", ".") // substitui vírgula por ponto para padrão JS
+            );
+          }}
+          className="w-full border border-gray-300 rounded-md p-2 text-right focus:ring-1 focus:ring-[#631b32] focus:outline-none"
         />
       </div>
 

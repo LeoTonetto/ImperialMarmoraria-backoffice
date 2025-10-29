@@ -3,38 +3,65 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 import { GetOrcamentos, Orcamento } from '../components/ApiOrcamentos';
 import ShowOrcamentos from '../components/TableOrcamentos';
+import Pagination from "../components/Paginacao";
 
 export default function Home() {
+  const [orcamentosOriginais, setOrcamentosOriginais] = useState<Orcamento[]>([]);
   const [orcamentos, setOrcamentos] = useState<Orcamento[]>([]);
   const [filtroStatus, setFiltroStatus] = useState<string>('all');
   const [pesquisaNome, setPesquisaNome] = useState<string>('');
+  const [paginaAtual, setPaginaAtual] = useState(0);
+  const itensPorPagina = 10; // número de orçamentos por página
 
   // Carrega os orçamentos ao iniciar
   useEffect(() => {
     const fetchData = async () => {
       const result = await GetOrcamentos();
-      if (result?.orcamentos) setOrcamentos(result.orcamentos);
+      if (result?.orcamentos) {
+        setOrcamentosOriginais(result.orcamentos);
+        setOrcamentos(result.orcamentos);
+      }
     };
     fetchData();
   }, []);
 
   // Filtro de status
-  const handleFiltroChange = async (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleFiltroChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const status = e.target.value;
     setFiltroStatus(status);
-
-    const result = await GetOrcamentos(status !== 'all' ? { status } : undefined);
-    if (result?.orcamentos) setOrcamentos(result.orcamentos);
+    setPaginaAtual(0);
+  
+    if (status === "all") {
+      setOrcamentos(orcamentosOriginais);
+    } else {
+      setOrcamentos(
+        orcamentosOriginais.filter((o) => o.status.toString() === status)
+      );
+    }
   };
-
+  
   // Pesquisa por nome
-  const handlePesquisaChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const nome = e.target.value;
-    setPesquisaNome(nome);
-
-    const result = await GetOrcamentos(nome ? { name: nome, status: filtroStatus !== 'all' ? filtroStatus : undefined } : undefined);
-    if (result?.orcamentos) setOrcamentos(result.orcamentos);
+  const handlePesquisaChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const nomeDigitado = e.target.value;
+    setPesquisaNome(nomeDigitado); // mantém o texto como o usuário digitou
+    setPaginaAtual(0);
+  
+    const nomeMinusculo = nomeDigitado.toLowerCase();
+  
+    const filtrados = orcamentosOriginais.filter((o) => {
+      const matchNome = o.nome.toLowerCase().includes(nomeMinusculo);
+      const matchStatus =
+        filtroStatus === "all" || o.status.toString() === filtroStatus;
+      return matchNome && matchStatus;
+    });
+  
+    setOrcamentos(filtrados);
   };
+  
+  const inicio = paginaAtual * itensPorPagina;
+  const fim = inicio + itensPorPagina;
+  const orcamentosPaginados = orcamentos.slice(inicio, fim);
+  const totalPaginas = Math.ceil(orcamentos.length / itensPorPagina);
 
   return (
     <div>
@@ -76,7 +103,17 @@ export default function Home() {
 
         {/* TABELA */}
 
-        <ShowOrcamentos orcamentos={orcamentos} />
+        <ShowOrcamentos orcamentos={orcamentosPaginados} />
+
+        {totalPaginas > 1 && (
+          <div className="flex justify-center my-6">
+            <Pagination
+              totalPaginas={totalPaginas}
+              paginaAtual={paginaAtual}
+              onChange={(p) => setPaginaAtual(p)}
+            />
+          </div>
+        )}
 
 
         <div className="table-pages"></div>

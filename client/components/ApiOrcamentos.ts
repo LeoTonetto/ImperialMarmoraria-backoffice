@@ -51,3 +51,60 @@ export async function GetOrcamentos(options?: { name?: string; status?: string }
     return { orcamentos: [] };
   }
 }
+
+export interface UpdateOrcamentoResponse {
+  sucesso: boolean;
+  mensagem?: string;
+  orcamento?: Orcamento;
+}
+
+export async function UpdateOrcamento(
+  id: number,
+  dados: Partial<Orcamento>
+): Promise<UpdateOrcamentoResponse> {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/Orcamento/${id}`;
+
+    const body = {
+      nome: dados.nome,
+      celular: dados.celular,
+      email: dados.email,
+      descricao: dados.descricao,
+      status: dados.status ?? 0,
+      valor: dados.valor?.toString() ?? "0",
+      dataFim: dados.dataFim || null,
+    };
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const erroTexto = await response.text();
+      console.error(`Erro ao atualizar orçamento: ${erroTexto}`);
+      return {
+        sucesso: false,
+        mensagem: `Erro ao atualizar orçamento: ${response.statusText}`,
+      };
+    }
+
+    // 🔹 Tenta ler JSON só se houver corpo
+    const text = await response.text();
+    const result = text ? JSON.parse(text) : null;
+
+    return {
+      sucesso: true,
+      orcamento: result || undefined,
+    };
+  } catch (error) {
+    console.error("UpdateOrcamento error:", error);
+    return {
+      sucesso: false,
+      mensagem: "Erro inesperado ao atualizar orçamento.",
+    };
+  }
+}
+
+
