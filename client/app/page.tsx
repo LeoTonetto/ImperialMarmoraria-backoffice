@@ -5,7 +5,10 @@ import { GetOrcamentos, Orcamento } from '../components/ApiOrcamentos';
 import ShowOrcamentos from '../components/TableOrcamentos';
 import Pagination from "../components/Paginacao";
 
+import { useProtectPage } from '../components/VerificaLogin'
 export default function Home() {
+  useProtectPage()
+  
   const [orcamentosOriginais, setOrcamentosOriginais] = useState<Orcamento[]>([]);
   const [orcamentos, setOrcamentos] = useState<Orcamento[]>([]);
   const [filtroStatus, setFiltroStatus] = useState<string>('all');

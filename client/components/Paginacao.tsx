@@ -25,3 +25,12 @@ export default function Pagination({ totalPaginas, paginaAtual, onChange }: Pagi
     </div>
   );
 }
+
+/* 
+import { useProtectPage } from '@/utils/protectPage'
+
+export default function FuncionariosPage() {
+  useProtectPage({ requireAdmin: true }) // exige role = administrator
+
+  return <h1>Página de Funcionários (Admin)</h1>
+} */
