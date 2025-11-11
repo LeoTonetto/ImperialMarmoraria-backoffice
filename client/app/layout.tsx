@@ -20,8 +20,7 @@ export default function RootLayout({
         <section className="flex gap-6">
           <Link href="/" id="paginaAtual">Lista Orçamentos</Link>
           <Link href="/contatos">Contatos</Link>
-          <Link href="/">Usuários</Link>
-          <Link href="/">Relatórios</Link>
+          <Link href="/usuarios">Usuários</Link>
           <Link href="/">Sair</Link>
         </section>
         {children}
