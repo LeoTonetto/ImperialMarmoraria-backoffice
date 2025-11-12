@@ -3,8 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import { GetOrcamentos, Orcamento } from '../../components/ApiOrcamentos';
 import Pagination from '../../components/Paginacao';
+import { useProtectPage } from '../../components/VerificaLogin'
 
 export default function ContatosPage() {
+  useProtectPage()
+
   const [orcamentos, setOrcamentos] = useState<Orcamento[]>([]);
   const [paginaAtual, setPaginaAtual] = useState<number>(0);
   const itensPorPagina = 10;

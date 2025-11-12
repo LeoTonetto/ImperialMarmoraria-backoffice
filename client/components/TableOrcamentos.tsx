@@ -21,6 +21,16 @@ interface Props {
 }
 
 export default function ShowOrcamentos({ orcamentos }: Props) {
+  function formatarValorBRL(valor: number | string) {
+    const numero = Number(String(valor).replace(/\D/g, "")) / 100;
+    if (isNaN(numero)) return "R$ 0,00";
+
+    return numero.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  }
+
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [editStates, setEditStates] = useState<Record<number, any>>({});
 
@@ -37,6 +47,22 @@ export default function ShowOrcamentos({ orcamentos }: Props) {
           status: orc.status,
           dataFim: orc.dataFim || "",
         },
+      }));
+    }
+  };
+
+  const handleEditChange = (id: number, field: keyof Orcamento, value: string) => {
+    if (field === "valor") {
+      const valorNumerico = value.replace(/\D/g, "");
+      const valorFormatado = formatarValorBRL(valorNumerico);
+      setEditStates((prev) => ({
+        ...prev,
+        [id]: { ...prev[id], [field]: valorFormatado },
+      }));
+    } else {
+      setEditStates((prev) => ({
+        ...prev,
+        [id]: { ...prev[id], [field]: value },
       }));
     }
   };
@@ -195,23 +221,11 @@ export default function ShowOrcamentos({ orcamentos }: Props) {
       <div className="bg-white p-3 rounded-md shadow-sm border border-gray-100">
         <p className="text-gray-500 text-xs font-medium uppercase mb-1">Valor</p>
         <input
-          type="text"
-          inputMode="decimal"
-          value={
-            editStates[orc.id]?.valor?.toString().replace(".", ",") ??
-            orc.valor.toString().replace(".", ",")
-          }
-          onChange={(e) => {
-            // Permite apenas números, vírgulas e pontos
-            const value = e.target.value.replace(/[^0-9.,]/g, "");
-            handleFieldChange(
-              orc.id,
-              "valor",
-              value.replace(",", ".") // substitui vírgula por ponto para padrão JS
-            );
-          }}
-          className="w-full border border-gray-300 rounded-md p-2 text-right focus:ring-1 focus:ring-[#631b32] focus:outline-none"
-        />
+                type="text"
+                value={editStates[orc.id]?.valor ?? orc.valor}
+                onChange={(e) => handleEditChange(orc.id, "valor", e.target.value)}
+                className="w-full border px-2 py-1 rounded text-right"
+              />
       </div>
 
       <div className="bg-white p-3 rounded-md shadow-sm border border-gray-100">

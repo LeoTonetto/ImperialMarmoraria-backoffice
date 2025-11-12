@@ -4,8 +4,8 @@ import React, { useEffect, useState, ChangeEvent } from 'react';
 import { GetOrcamentos, Orcamento } from '../components/ApiOrcamentos';
 import ShowOrcamentos from '../components/TableOrcamentos';
 import Pagination from "../components/Paginacao";
-
 import { useProtectPage } from '../components/VerificaLogin'
+
 export default function Home() {
   useProtectPage()
   
